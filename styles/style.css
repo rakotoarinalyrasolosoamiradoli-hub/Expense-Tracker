@@ -1,0 +1,721 @@
+
+/* ==================================================
+   EXPENSE TRACKER — LIQUID GLASS REFINED
+   White / Sky Blue / Glacier Blue
+================================================== */
+
+/* 1. Variables */
+
+:root {
+    --blue-primary: #3298F5;
+    --blue-dark: #176FC1;
+    --blue-deep: #173C65;
+    --blue-light: #EAF6FF;
+    --blue-pale: #F4FAFF;
+
+    --text-primary: #243B53;
+    --text-secondary: #718096;
+
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-solid: rgba(255, 255, 255, 0.92);
+    --glass-border: rgba(255, 255, 255, 0.95);
+
+    --border: rgba(133, 187, 231, 0.25);
+
+    --shadow-glass:
+        0 18px 55px rgba(62, 133, 201, 0.10),
+        0 4px 15px rgba(62, 133, 201, 0.05);
+
+    --radius-large: 24px;
+    --radius-medium: 15px;
+    --radius-small: 10px;
+
+    --danger: #E45D69;
+}
+
+/* 2. Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    padding: 35px 22px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: var(--text-primary);
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(155, 215, 255, 0.35),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(190, 229, 255, 0.45),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #FFFFFF,
+            #F4FAFF 55%,
+            #EAF6FF
+        );
+
+    background-attachment: fixed;
+    position: relative;
+    isolation: isolate;
+    overflow-x: hidden;
+}
+
+/* 3. Background decoration */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+body::before {
+    width: 320px;
+    height: 320px;
+    top: -130px;
+    right: -100px;
+
+    background: rgba(114, 196, 255, 0.15);
+    filter: blur(4px);
+}
+
+body::after {
+    width: 280px;
+    height: 280px;
+    bottom: -120px;
+    left: -100px;
+
+    background: rgba(166, 219, 255, 0.20);
+    filter: blur(5px);
+}
+
+/* 4. Titles */
+
+h1 {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 8px auto 5px;
+
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1.3px;
+
+    background: linear-gradient(
+        120deg,
+        #173C65,
+        #3298F5 65%,
+        #73C5FF
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: titleAppear 0.7s ease both;
+}
+
+h2 {
+    color: var(--blue-deep);
+    font-size: 1.45rem;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+/* 5. Navbar */
+
+.navbar {
+    width: 100%;
+    max-width: 1150px;
+    min-height: 72px;
+
+    margin: 0 auto 12px;
+    padding: 12px 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 19px;
+
+    box-shadow: var(--shadow-glass);
+}
+
+/* Logo */
+
+.logo {
+    text-decoration: none;
+    color: var(--blue-deep);
+
+    font-size: 1.35rem;
+    font-weight: 850;
+    letter-spacing: -0.7px;
+}
+
+.logo span {
+    color: var(--blue-primary);
+}
+
+/* Navigation links */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    list-style: none;
+}
+
+.nav-links a {
+    display: block;
+    padding: 10px 16px;
+
+    color: var(--text-secondary);
+    text-decoration: none;
+
+    font-size: 0.9rem;
+    font-weight: 650;
+
+    border-radius: 11px;
+
+    transition: all 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--blue-dark);
+    background: rgba(50, 152, 245, 0.09);
+}
+
+.nav-links a.active {
+    color: #FFFFFF;
+
+    background: linear-gradient(
+        120deg,
+        #65B9FA,
+        #3298F5 65%,
+        #247BD8
+    );
+
+    box-shadow: 0 5px 15px rgba(50, 152, 245, 0.20);
+}
+
+/* 6. Form */
+
+#formulaire {
+    width: min(100%, 550px);
+    padding: 36px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-large);
+
+    box-shadow: var(--shadow-glass);
+
+    position: relative;
+    overflow: hidden;
+
+    animation: cardAppear 0.7s ease both;
+}
+
+#formulaire::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #FFFFFF,
+        transparent
+    );
+
+    pointer-events: none;
+}
+
+#formulaire h2 {
+    margin-bottom: 5px;
+    color: var(--blue-deep);
+    font-size: 1.6rem;
+}
+
+#formulaire p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+/* 7. Labels */
+
+#formulaire label {
+    margin-top: 7px;
+
+    color: #314D6C;
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+/* 8. Inputs and selects */
+
+#formulaire input,
+#formulaire select {
+    width: 100%;
+    min-height: 50px;
+    padding: 13px 15px;
+
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+
+    background: rgba(255, 255, 255, 0.82);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-medium);
+
+    outline: none;
+
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        0 2px 8px rgba(60, 130, 190, 0.025);
+
+    transition: 0.25s ease;
+}
+
+#formulaire input::placeholder {
+    color: #9AACC0;
+}
+
+#formulaire input:hover,
+#formulaire select:hover {
+    border-color: rgba(50, 152, 245, 0.55);
+    background: #FFFFFF;
+}
+
+#formulaire input:focus,
+#formulaire select:focus {
+    border-color: var(--blue-primary);
+    background: #FFFFFF;
+
+    box-shadow:
+        0 0 0 4px rgba(50, 152, 245, 0.12),
+        0 5px 16px rgba(50, 152, 245, 0.07);
+}
+
+#formulaire select {
+    cursor: pointer;
+}
+
+#formulaire input[type="date"] {
+    cursor: pointer;
+}
+
+#formulaire input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* 9. Buttons */
+
+button {
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+
+    border: none;
+    outline: none;
+
+    transition: all 0.25s ease;
+}
+
+/* Home button */
+
+#naviguer {
+    min-width: 180px;
+    padding: 14px 30px;
+
+    color: #FFFFFF;
+    font-size: 0.98rem;
+
+    background: linear-gradient(
+        120deg,
+        #70C5FF,
+        #3298F5 55%,
+        #2179DF
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+
+    box-shadow:
+        0 9px 24px rgba(50, 152, 245, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+#naviguer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(50, 152, 245, 0.30);
+}
+
+#naviguer:active {
+    transform: scale(0.98);
+}
+
+/* Add button */
+
+#ajouter {
+    width: 100%;
+    min-height: 53px;
+    margin-top: 12px;
+    padding: 14px 20px;
+
+    color: #FFFFFF;
+    font-size: 0.98rem;
+
+    background: linear-gradient(
+        120deg,
+        #70C5FF,
+        #3298F5 55%,
+        #2179DF
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 22px rgba(50, 152, 245, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+#ajouter:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 13px 28px rgba(50, 152, 245, 0.30);
+}
+
+#ajouter:active {
+    transform: scale(0.99);
+}
+
+/* 10. History table */
+
+table {
+    width: 100%;
+    max-width: 1150px;
+    margin: 10px auto 15px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+
+    box-shadow: var(--shadow-glass);
+
+    overflow: hidden;
+}
+
+thead {
+    background: linear-gradient(
+        120deg,
+        rgba(220, 241, 255, 0.95),
+        rgba(190, 225, 250, 0.95)
+    );
+}
+
+th {
+    padding: 17px 20px;
+
+    color: #24547C;
+    font-size: 0.83rem;
+    font-weight: 750;
+    letter-spacing: 0.35px;
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px 20px;
+
+    color: var(--text-primary);
+    font-size: 0.91rem;
+
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(186, 230, 253, 0.22);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 11. Delete button */
+
+td button {
+    padding: 8px 13px;
+
+    color: #D94C5A;
+    background: rgba(255, 236, 238, 0.9);
+
+    border: 1px solid rgba(225, 93, 105, 0.12);
+    border-radius: 9px;
+
+    font-size: 0.82rem;
+}
+
+td button:hover {
+    color: #FFFFFF;
+    background: var(--danger);
+}
+
+/* 12. Total expenses */
+
+#afficheTotal {
+    width: fit-content;
+    min-width: 245px;
+
+    margin: 0 auto 15px;
+    padding: 20px 30px;
+
+    color: var(--blue-deep);
+    font-size: 1.8rem;
+    font-weight: 850;
+    letter-spacing: -0.6px;
+    text-align: center;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+
+    box-shadow: var(--shadow-glass);
+    position: relative;
+}
+
+#afficheTotal::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18%;
+    bottom: 18%;
+    width: 4px;
+
+    background: linear-gradient(
+        180deg,
+        #70C5FF,
+        #3298F5
+    );
+
+    border-radius: 0 5px 5px 0;
+}
+
+/* 13. General links */
+
+a {
+    text-decoration: none;
+}
+
+/* 14. Focus accessibility */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid rgba(50, 152, 245, 0.45);
+    outline-offset: 3px;
+}
+
+/* 15. Animations */
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titleAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 16. Responsive */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 25px 16px;
+        gap: 20px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 14px;
+        padding: 17px 12px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .nav-links a {
+        padding: 9px 11px;
+        font-size: 0.83rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #formulaire {
+        padding: 25px 20px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th,
+    td {
+        padding: 13px 12px;
+    }
+
+    #afficheTotal {
+        font-size: 1.5rem;
+        min-width: 220px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 20px 11px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links a {
+        padding: 8px;
+        font-size: 0.78rem;
+    }
+
+    #formulaire {
+        padding: 21px 16px;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+}
+
+/* 17. Reduce motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+.graphique-container {
+    width: 90%;
+    max-width: 1000px;
+    padding: 25px;
+    margin: 25px auto;
+
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+
+    box-shadow: 0 12px 35px rgba(50, 152, 245, 0.12);
+}
+
+.graphique-container h2 {
+    color: #172b4d;
+    margin-bottom: 25px;
+}
+
+.graphique-container canvas {
+    max-height: 400px;
+}

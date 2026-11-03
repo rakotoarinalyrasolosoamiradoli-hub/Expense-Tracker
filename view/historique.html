@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../expense (1).png">
+    <title>Expense Tracker - Historique de dépense</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <h1>Historique de vos dépenses</h1>
+    <nav class="navbar">
+        <a href="../view/index.html" class="logo">Expense<span>Tracker</span></a>
+
+        <ul class="nav-links">
+            <li><a href="../view/index.html">Accueil</a></li>
+            <li><a href="/view/formulaireDepense.html">Ajouter</a></li>
+            <li><a href="/view/historique.html" class="active">Historique</a></li>
+        </ul>
+    </nav>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Montant</th>
+                <th>Catégorie</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableauDepenses"></tbody>
+    </table>
+
+    <!--Total des dépenses-->
+    <h2>Total des dépenses</h2>
+    <p id="afficheTotal">0 Ar</p>
+
+    <section class="graphique-container">
+        <h2>Statistiques des dépenses</h2>
+        <canvas id="graphiqueDepenses"></canvas>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/historique.js"></script>
+    <a href="/view/formulaireDepense.html"><button id="naviguer">Retour</button></a>
+</body>
+</html>

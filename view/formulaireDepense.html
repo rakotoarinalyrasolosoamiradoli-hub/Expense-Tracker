@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interface de suivi des dépenses personnelles.">
+  <link rel="icon" type="image/svg+xml" href="../expense (1).png">
+  <title>Expense Tracker - Formulaire Dépense</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../view/index.html" class="logo">Expense<span>Tracker</span></a>
+
+    <ul class="nav-links">
+        <li><a href="../view/index.html">Accueil</a></li>
+        <li><a href="/view/formulaireDepense.html" class="active">Ajouter</a></li>
+        <li><a href="/view/historique.html">Historique</a></li>
+    </ul>
+  </nav>
+    <!--Formulaire d'ajout de dépense-->
+    <h2>Ajouter une dépense</h2>
+  <p>Gardez le contrôle de vos dépenses au quotidien.</p>
+    <form id="formulaire">
+        <label for="descriptionDepense">Description :</label>
+        <input type="text" name="description" id="descriptionDepense" placeholder="Description de la depense" required><br>
+        <label for="Montant">Montant :</label>
+        <input type="number" name="montant" id="montant" placeholder="Montant..." min="0.01" step="0.01" required><br>
+
+        <label for="categorie">Catégorie : </label>
+        <select id="categorie" name="categorie" required>
+            <option value="">--Veuillez choisir une option--</option>
+            <option value="alimentation">Alimentation</option>
+            <option value="loyer">Loyer</option>
+            <option value="transport">Transport</option>
+            <option value="etude">Etude</option>
+            <option value="Goûter">Goûter</option>
+            <option value="Frais et Carbutant">Frais et Carbutant</option>
+            <option value="Médical">Médical</option>
+        </select><br>
+        <input type="date" name="date" id="dates" required><br>
+        <button type="submit" id="ajouter">Ajouter</button>
+    </form><br>
+    
+    <a href="../view/index.html"><button id="naviguer">Accueil</button></a>
+    <a href="../view/historique.html"><button id="naviguer">Voir l'historique</button></a>
+  <script src="../js/depense.js"></script>
+</body>
+</html>
